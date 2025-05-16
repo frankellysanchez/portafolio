@@ -11,13 +11,15 @@ interface Point {
 export default function TechMeshBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   let points: Point[] = [];
-  const pointCount = 50;
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d")
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    const isMobile = window.innerWidth < 768;
+    const pointCount = isMobile ? 20 : 50;
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
@@ -38,8 +40,8 @@ export default function TechMeshBackground() {
       ctx.clearRect(0, 0, width, height);
 
       // draw lines
-      for (let i = 0; i < pointCount; i++) {
-        for (let j = i + 1; j < pointCount; j++) {
+      for (let i = 0; i < points.length; i++) {
+        for (let j = i + 1; j < points.length; j++) {
           const p1 = points[i];
           const p2 = points[j];
           const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
@@ -58,14 +60,16 @@ export default function TechMeshBackground() {
       for (const p of points) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = "#60A5FA"; // Tailwind blue-400
+        ctx.fillStyle = "#60A5FA";
         ctx.fill();
 
-        p.x += p.vx;
-        p.y += p.vy;
+        if (!isMobile) {
+          p.x += p.vx;
+          p.y += p.vy;
 
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
+          if (p.x < 0 || p.x > width) p.vx *= -1;
+          if (p.y < 0 || p.y > height) p.vy *= -1;
+        }
       }
 
       requestAnimationFrame(draw);
