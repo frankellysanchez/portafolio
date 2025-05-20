@@ -30,7 +30,7 @@ export default function AnimatedNameMesh() {
     // Render text to pixel data to get particle targets
     const getTargetPoints = (text: string): Particle[] => {
       ctx.clearRect(0, 0, width, height);
-      const fontSize = Math.max(0, Math.floor(canvas.width / 10));
+      const fontSize = Math.max(12, Math.floor(height * 0.3));
 ctx.font = `bold ${fontSize}px Arial`;
 
       ctx.textAlign = "center";
@@ -101,6 +101,7 @@ ctx.font = `bold ${fontSize}px Arial`;
 
   // When text index changes, update target positions only
   useEffect(() => {
+    setTimeout(() => window.dispatchEvent(new Event("resize")), 0);
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -148,7 +149,8 @@ ctx.font = `bold ${fontSize}px Arial`;
     updateTargetPoints(texts[currentTextIndex]);
   }, [currentTextIndex]);
 
-  return <canvas ref={canvasRef} className="w-full h-32 relative z-0" />;
+  return <canvas ref={canvasRef} className="w-full h-24 sm:h-28 md:h-32 lg:h-36" />
+  ;
 }
 
 
