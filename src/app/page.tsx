@@ -61,12 +61,14 @@ export default function Home() {
             I build modern and responsive web interfaces with React, TypeScript and animations that elevate the user experience.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <a
-              href="/cv.pdf"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition-all transform hover:scale-105"
-            >
-              Download CV
-            </a>
+          <a
+  href="/frankelly_cv.pdf"
+  download
+  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition-all transform hover:scale-105"
+>
+  Download CV
+</a>
+
           </div>
         </div>
 
