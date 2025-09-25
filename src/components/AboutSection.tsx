@@ -2,9 +2,11 @@
 
 import { useRef } from "react";
 import { Code, Layers, Zap, MonitorSmartphone, Sparkles } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function AboutSection() {
   const ref = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
 
   // Spotlight mouse-follow
   const onMouseMove = (e: React.MouseEvent) => {
@@ -27,7 +29,9 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative w-full py-24 px-4 sm:px-10 bg-black text-white"
+      className={`relative w-full py-24 px-4 sm:px-10 ${
+        theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'
+      } transition-colors duration-500`}
     >
       {/* Aurora + dots background */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
@@ -59,7 +63,11 @@ export default function AboutSection() {
         }}
       >
         {/* Card glass interna */}
-        <div className="rounded-3xl bg-black/60 backdrop-blur-md border border-white/10 px-6 sm:px-12 py-12">
+        <div className={`rounded-3xl ${
+          theme === 'dark'
+            ? 'bg-black/60 border-white/10'
+            : 'bg-white/80 border-black/10'
+        } backdrop-blur-md border px-6 sm:px-12 py-12 transition-colors duration-500`}>
           {/* Header */}
           <div className="flex items-center justify-center gap-3 mb-8">
             <Sparkles className="text-blue-400 w-6 h-6" />
@@ -71,8 +79,10 @@ export default function AboutSection() {
           </div>
 
           {/* Intro breve y escaneable */}
-          <p className="mx-auto max-w-3xl text-center text-base sm:text-lg text-gray-300 leading-relaxed">
-            I’m an <span className="text-blue-300 font-semibold">eager, forward‑thinking</span> Junior Frontend Developer with a solid
+          <p className={`mx-auto max-w-3xl text-center text-base sm:text-lg ${
+            theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+          } leading-relaxed transition-colors duration-300`}>
+            I&apos;m an <span className="text-blue-400 font-semibold">eager, forward‑thinking</span> Junior Frontend Developer with a solid
             foundation in UX/UI. I focus on responsive, accessible interfaces,
             clean composition and smooth micro‑interactions.
           </p>
@@ -83,7 +93,11 @@ export default function AboutSection() {
     <span
       key={b.label}
       title={b.title}
-      className="select-none rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-gray-200 transition hover:bg-white/10 hover:-translate-y-0.5"
+      className={`select-none rounded-full ${
+        theme === 'dark'
+          ? 'border-white/10 bg-white/5 text-gray-200 hover:bg-white/10'
+          : 'border-black/10 bg-black/5 text-gray-800 hover:bg-black/10'
+      } border px-3 py-1 text-sm transition hover:-translate-y-0.5 duration-200`}
     >
       {b.label}
     </span>
@@ -94,12 +108,18 @@ export default function AboutSection() {
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Skills */}
             <div className="group relative rounded-2xl p-[1px] bg-gradient-to-r from-blue-500/60 to-blue-400/50 transition-transform hover:-translate-y-1">
-              <div className="rounded-2xl h-full bg-black/60 backdrop-blur-md border border-white/10 p-6">
+              <div className={`rounded-2xl h-full ${
+                theme === 'dark'
+                  ? 'bg-black/60 border-white/10'
+                  : 'bg-white/80 border-black/10'
+              } backdrop-blur-md border p-6 transition-colors duration-500`}>
                 <div className="flex items-center gap-3 mb-4">
                   <Layers className="text-blue-400 w-6 h-6" />
                   <h3 className="text-2xl font-semibold">Skills</h3>
                 </div>
-                <ul className="space-y-3 text-base leading-relaxed text-gray-200">
+                <ul className={`space-y-3 text-base leading-relaxed ${
+                  theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
+                } transition-colors duration-300`}>
                   <li className="flex items-center gap-2">
                     <Zap className="w-4 h-4 text-blue-400" />
                     Responsive Web Design & Layout systems
@@ -135,12 +155,18 @@ export default function AboutSection() {
 
             {/* Languages & Tools */}
             <div className="group relative rounded-2xl p-[1px] bg-gradient-to-r from-blue-500/60 to-blue-400/50 transition-transform hover:-translate-y-1">
-              <div className="rounded-2xl h-full bg-black/60 backdrop-blur-md border border-white/10 p-6">
+              <div className={`rounded-2xl h-full ${
+                theme === 'dark'
+                  ? 'bg-black/60 border-white/10'
+                  : 'bg-white/80 border-black/10'
+              } backdrop-blur-md border p-6 transition-colors duration-500`}>
                 <div className="flex items-center gap-3 mb-4">
                   <Code className="text-blue-400 w-6 h-6" />
                   <h3 className="text-2xl font-semibold">Languages & Tools</h3>
                 </div>
-                <ul className="space-y-3 text-base leading-relaxed text-gray-200">
+                <ul className={`space-y-3 text-base leading-relaxed ${
+                  theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
+                } transition-colors duration-300`}>
                   <li className="flex items-center gap-2">
                     <MonitorSmartphone className="w-4 h-4 text-blue-400" />
                     JavaScript (ES6+), TypeScript
@@ -168,12 +194,16 @@ export default function AboutSection() {
 
           {/* Nota de disponibilidad/CTA opcional */}
           <div className="mt-10 text-center">
-          <a
-  href="mailto:frankellysanchez@hotmail.com"
-  className="inline-flex items-center justify-center rounded-full border border-blue-500/50 bg-blue-500/10 px-5 py-2 text-sm font-medium text-blue-200 transition hover:bg-blue-500/20 hover:-translate-y-0.5"
->
-  Available for Front‑end work
-</a>
+            <a
+              href="mailto:frankellysanchez@hotmail.com"
+              className={`inline-flex items-center justify-center rounded-full border border-blue-500/50 ${
+                theme === 'dark'
+                  ? 'bg-blue-500/10 text-blue-200 hover:bg-blue-500/20'
+                  : 'bg-blue-500/20 text-blue-700 hover:bg-blue-500/30'
+              } px-5 py-2 text-sm font-medium transition hover:-translate-y-0.5 duration-200`}
+            >
+              Available for Front‑end work
+            </a>
           </div>
         </div>
       </div>

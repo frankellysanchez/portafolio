@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fontsource/geist-sans": "^5.2.5",
+    "framer-motion": "^12.23.21",
     "lucide-react": "^0.510.0",
     "motion": "^12.11.4",
     "next": "15.3.2",

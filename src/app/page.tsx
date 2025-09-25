@@ -8,10 +8,11 @@ import Projects from '@/components/ProjectsSection';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import TechMeshBackground from '@/components/TechMesBackgrpund';
-import { fadeIn } from '@/components/Animations';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function Home() {
   const [showScroll, setShowScroll] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,16 +22,13 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+
   return (
-    <div className="bg-black text-white min-h-screen flex flex-col justify-between scroll-smooth">
+    <div className={`${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'} min-h-screen flex flex-col justify-between scroll-smooth transition-colors duration-500`}>
       <Navbar />
 
-      <motion.section
-        className="relative min-h-screen flex flex-col-reverse md:flex-row items-center justify-center gap-4 px-6 md:px-12 bg-black overflow-hidden"
-        variants={fadeIn}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
+      <section
+        className={`relative min-h-screen flex flex-col-reverse md:flex-row items-center justify-center gap-4 px-6 md:px-12 ${theme === 'dark' ? 'bg-black' : 'bg-white'} overflow-hidden transition-colors duration-500`}
         id="home"
       >
         {/* Fondo animado (solo en desktop) */}
@@ -40,43 +38,74 @@ export default function Home() {
 
         {/* Blur animado */}
         <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 0.3, scale: 1 }}
+          transition={{ duration: 1.5, delay: 0.1 }}
           className="absolute top-0 left-0 w-full h-full z-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.2 }}
-          transition={{ duration: 2 }}
         >
-          <div className="absolute w-72 h-72 bg-blue-500 blur-2xl rounded-full opacity-80 top-[-50px] left-[-50px] animate-pulse"></div>
+          <div className={`absolute w-72 h-72 ${theme === 'dark' ? 'bg-blue-500' : 'bg-blue-400'} blur-2xl rounded-full top-[-50px] left-[-50px]`}></div>
         </motion.div>
 
         {/* Info principal */}
         <div className="relative z-10 max-w-2xl text-center md:text-left">
-          <p className="text-blue-400 text-lg tracking-wider uppercase mb-2">
-            Hello, I’m
-          </p>
-          <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-4">
+          <motion.p
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-blue-400 text-lg tracking-wider uppercase mb-2"
+          >
+            Hello, I&apos;m
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className={`text-5xl md:text-6xl font-extrabold ${theme === 'dark' ? 'text-white' : 'text-black'} mb-4`}
+          >
             Frankelly <span className="text-blue-400">Sánchez</span>
-          </h1>
-          <h2 className="text-2xl text-gray-300 mb-6">Frontend Developer</h2>
-          <p className="text-lg text-gray-400 leading-relaxed mb-8">
+          </motion.h1>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className={`text-2xl ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'} mb-6`}
+          >
+            Frontend Developer
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className={`text-lg ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} leading-relaxed mb-8`}
+          >
             I build modern and responsive web interfaces with React, TypeScript and animations that elevate the user experience.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-          <a
-  href="/frankelly_cv.pdf"
-  download
-  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition-all transform hover:scale-105"
->
-  Download CV
-</a>
-
-          </div>
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+          >
+            <a
+              href="/frankelly_cv.pdf"
+              download
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-full transition-all transform hover:scale-105"
+            >
+              Download CV
+            </a>
+          </motion.div>
         </div>
 
         {/* Imagen circular con aura */}
-        <div className="relative z-10 flex sm:block justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="relative z-10 flex sm:block justify-center"
+        >
           <div className="relative w-40 h-40 sm:w-64 sm:h-64 mb-6 sm:mb-0">
             {/* Aura externa */}
-            <div className="absolute inset-0 scale-110 rounded-full bg-blue-500 opacity-40 blur-xl animate-pulse z-0"></div>
+            <div className={`absolute inset-0 scale-110 rounded-full ${theme === 'dark' ? 'bg-blue-500' : 'bg-blue-400'} opacity-40 blur-xl z-0`}></div>
 
             {/* Imagen */}
             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-blue-500 shadow-lg flex items-end z-10">
@@ -90,8 +119,8 @@ export default function Home() {
               />
             </div>
           </div>
-        </div>
-      </motion.section>
+        </motion.div>
+      </section>
 
       {/* Secciones */}
       <AboutSection />
