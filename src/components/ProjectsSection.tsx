@@ -74,9 +74,6 @@ export default function Projects() {
             Projects &amp; Contributions
           </span>
         </h2>
-        <p className={`mt-4 text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'} max-w-2xl mx-auto leading-relaxed`}>
-          A selection of recent work with a focus on clear UX and performance.
-        </p>
       </div>
 
       {/* Enhanced Grid with Framer Motion */}

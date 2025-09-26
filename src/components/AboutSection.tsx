@@ -82,9 +82,9 @@ export default function AboutSection() {
           <p className={`mx-auto max-w-3xl text-center text-base sm:text-lg ${
             theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
           } leading-relaxed transition-colors duration-300`}>
-            I&apos;m an <span className="text-blue-400 font-semibold">eager, forward‑thinking</span> Junior Frontend Developer with a solid
-            foundation in UX/UI. I focus on responsive, accessible interfaces,
-            clean composition and smooth micro‑interactions.
+            I&apos;m an <span className="text-blue-400 font-semibold">Frontend Developer </span> (React/Next.js) with a strong UX/UI foundation. 
+            I build accessible, responsive interfaces with clean component architecture, 
+            performance in mind, and smooth micro-interactions.
           </p>
 
           {/* Badges rápidas */}
